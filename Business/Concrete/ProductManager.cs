@@ -25,6 +25,11 @@ namespace Business.Concrete
             //böyle yazarsak iş kodlarının tamamı bellekte çalışır
             //InMemoryProductDal inMemoryProductDal = new InMemoryProductDal();
             return _productDal.GetAll();
+
+            //Filtre işlemi
+            //return _productDal.GetAll(p=>p.CategoryId==2);
+
+
         }
     }
 }

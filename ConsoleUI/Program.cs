@@ -15,6 +15,7 @@ namespace ConsoleUI
             //ProductTest2();
             //ProductTest3();
             //ProductTest4();
+            ProductTest5();
 
             //IoC Container gelecek
             //InMemoryProductDal'dan EfProductDal'e gectik
@@ -39,7 +40,7 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetAllByUnitPrice(40, 100))
+            foreach (var product in productManager.GetAllByUnitPrice(40, 100).Data)
             {
                 Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice + " Stok Sayısı:" + product.UnitsInStock);
             }
@@ -48,7 +49,7 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetAll().Data)
            {
                Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice+ " Stok Sayısı:"+ product.UnitsInStock);
            }
@@ -57,7 +58,7 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetAllByCategoryId(2))
+            foreach (var product in productManager.GetAllByCategoryId(2).Data)
             {
                 Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice + " Stok Sayısı:" + product.UnitsInStock);
             }
@@ -66,9 +67,25 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetProductDetails())
+            foreach (var product in productManager.GetProductDetails().Data)
             {
                 Console.WriteLine("Ürün Adı: " + product.ProductName + " Kategori adı: " + product.CategoryName + " Stok Sayısı:" + product.UnitsInStock);
+            }
+        }
+        private static void ProductTest5()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            var result = productManager.GetProductDetails();
+            if (result.Success)
+            {
+                foreach (var product in productManager.GetProductDetails().Data)
+                {
+                    Console.WriteLine("Ürün Adı: " + product.ProductName + " Kategori adı: " + product.CategoryName + " Stok Sayısı:" + product.UnitsInStock);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Core.Utilities.Results
     public class Result : IResult
     {
         //this(result) ile aşağıda olan tek parametrekş Result çalışır
-        public Result(bool success,string message):this(success)
+        public Result(bool success, string message) : this(success)
         {
             Message = message;
         }

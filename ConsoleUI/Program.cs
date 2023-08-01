@@ -14,10 +14,19 @@ namespace ConsoleUI
             //ProductTest1();
             //ProductTest2();
             //ProductTest3();
-            
+            //ProductTest4();
+
             //IoC Container gelecek
             //InMemoryProductDal'dan EfProductDal'e gectik
             //ProductManager productManager = new ProductManager(new InMemoryProductDal());
+            //ProductManager productManager = new ProductManager(new EfProductDal());
+            //DTOs Data Transformation Object
+
+            //CategoryTest1();
+        }
+
+        private static void CategoryTest1()
+        {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
             foreach (var category in categoryManager.GetAll())
@@ -35,7 +44,6 @@ namespace ConsoleUI
                 Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice + " Stok Sayısı:" + product.UnitsInStock);
             }
         }
-
         private static void ProductTest2()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
@@ -45,7 +53,6 @@ namespace ConsoleUI
                Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice+ " Stok Sayısı:"+ product.UnitsInStock);
            }
         }
-
         private static void ProductTest3()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
@@ -53,6 +60,15 @@ namespace ConsoleUI
             foreach (var product in productManager.GetAllByCategoryId(2))
             {
                 Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice + " Stok Sayısı:" + product.UnitsInStock);
+            }
+        }
+        private static void ProductTest4()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+
+            foreach (var product in productManager.GetProductDetails())
+            {
+                Console.WriteLine("Ürün Adı: " + product.ProductName + " Kategori adı: " + product.CategoryName + " Stok Sayısı:" + product.UnitsInStock);
             }
         }
     }

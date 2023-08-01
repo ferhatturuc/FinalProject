@@ -15,6 +15,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=northwind;Trusted_Connection=true");
         }
+        //DbSet<Order> veritabanında bir tabloyu temsil eder
+        //<Order> ifadesi, "Order" adlı sınıfın veritabanındaki tablosunu temsil etmek için kullanıldığını belirtir.
+        //Orders"  Bu, özelliğin adıdır. Özelliğe "Orders" adıyla erişilebilir olacak.
+        //order nesnesini Orders ' la ilişkilendirme
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

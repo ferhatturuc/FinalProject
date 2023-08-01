@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 namespace DataAccess.Concrete.EntityFramework
 {
     //NuGet
+    //sen bir IProductDal sın aynı zamanda oluşturduğun metotlar  EfEntityRepositoryBase de var 
+    //sen EfEntityRepositoryBase sın aynı zamanda IProductDal sın
     public class EfProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
     {
 

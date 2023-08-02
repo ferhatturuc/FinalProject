@@ -15,7 +15,7 @@ namespace ConsoleUI
             //ProductTest2();
             //ProductTest3();
             //ProductTest4();
-            ProductTest5();
+            //ProductTest5();
 
             //IoC Container gelecek
             //InMemoryProductDal'dan EfProductDal'e gectik

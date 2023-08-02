@@ -22,6 +22,7 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        //[LogAspect]-->AOP
         public IResult Add(Product product)
         {
             if (product.ProductName.Length < 2)

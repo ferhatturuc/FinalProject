@@ -10,7 +10,8 @@ namespace WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            //Autofac, Ninject,CastleWindsor,StructureMap, LightInject, DryInject --> IoC Container
+            //Autofac bize AOP imkaný sunuyor.
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddSingleton<IProductService, ProductManager>();

@@ -29,14 +29,8 @@ namespace Business.Concrete
         {
             //validation code
             //business codes
-            
-            var context = new ValidationContext<Product>(product);
-            ProductValidator productValidator = new ProductValidator();
-            var result = productValidator.Validate(context);
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
+
+            ValidationTool.Validate(new ProductValidator, product);
             
             _productDal.Add(product);
 

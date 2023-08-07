@@ -23,10 +23,12 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
+        ICategoryService _categoryService;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal,ICategoryService categoryService)
         {
             _productDal = productDal;
+            _categoryService = categoryService;
         }
 
         //[LogAspect]-->AOP 
@@ -37,7 +39,8 @@ namespace Business.Concrete
             //business codes
             IResult result = BusinessRules.Run(
                 CheckIfProductCountOfCategoryCorrect(product.CategoryId),
-                CheckIfProductNameExist(product.ProductName));
+                CheckIfProductNameExist(product.ProductName),
+                CheckIfCategoryLimitExceded());
 
             if (result !=null)
             {
@@ -99,6 +102,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        //Business Rules
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
             //Select count(*) from product where categoryId=1 aşağıdaki kod bunu çalıştırır
@@ -116,6 +120,16 @@ namespace Business.Concrete
             if (result == true)
             {
                 return new ErrorResult(Messages.ProductNameAlreadyExist);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfCategoryLimitExceded()
+        {
+            var result = _categoryService.GetAll();
+            if (result.Data.Count > 15)
+            {
+                return new ErrorResult(Messages.CategoryLimitExceded);
             }
             return new SuccessResult();
         }

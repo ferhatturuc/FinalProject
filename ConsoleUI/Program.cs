@@ -30,7 +30,7 @@ namespace ConsoleUI
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
-            foreach (var category in categoryManager.GetAll())
+            foreach (var category in categoryManager.GetAll().Data)
             {
                 Console.WriteLine("Kategori Adı:" + category.CategoryName);
             }
@@ -38,7 +38,9 @@ namespace ConsoleUI
 
         private static void ProductTest1()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager =
+                new ProductManager(new EfProductDal(),
+                new CategoryManager(new EfCategoryDal()));
 
             foreach (var product in productManager.GetAllByUnitPrice(40, 100).Data)
             {
@@ -47,16 +49,20 @@ namespace ConsoleUI
         }
         private static void ProductTest2()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager =
+                new ProductManager(new EfProductDal(),
+                new CategoryManager(new EfCategoryDal()));
 
             foreach (var product in productManager.GetAll().Data)
-           {
-               Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice+ " Stok Sayısı:"+ product.UnitsInStock);
-           }
+            {
+                Console.WriteLine("Ürün Adı:" + product.ProductName + " Ürün fiyatı: " + product.UnitPrice + " Stok Sayısı:" + product.UnitsInStock);
+            }
         }
         private static void ProductTest3()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager = 
+                new ProductManager(new EfProductDal(),
+                new CategoryManager(new EfCategoryDal()));
 
             foreach (var product in productManager.GetAllByCategoryId(2).Data)
             {
@@ -65,7 +71,9 @@ namespace ConsoleUI
         }
         private static void ProductTest4()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager = 
+                new ProductManager(new EfProductDal(), 
+                new CategoryManager(new EfCategoryDal()));
 
             foreach (var product in productManager.GetProductDetails().Data)
             {
@@ -74,7 +82,9 @@ namespace ConsoleUI
         }
         private static void ProductTest5()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
+            ProductManager productManager = 
+                new ProductManager(new EfProductDal(), 
+                new CategoryManager(new EfCategoryDal()));
             var result = productManager.GetProductDetails();
             if (result.Success)
             {

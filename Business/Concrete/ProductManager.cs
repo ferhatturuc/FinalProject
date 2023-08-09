@@ -31,6 +31,7 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
+        //[SecuredOperation("product.add,admin")] claim
         //[LogAspect]-->AOP 
         //validation code
         [ValidationAspect(typeof(ProductValidator))]

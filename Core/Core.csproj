@@ -12,11 +12,7 @@
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
     <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utilities\Security\Encryption\" />
-    <Folder Include="Utilities\Security\JWT\" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.32.1" />
   </ItemGroup>
 
 </Project>

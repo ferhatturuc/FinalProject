@@ -1,5 +1,4 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using Core.Entities.Concrete;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -20,7 +19,6 @@ namespace Core.Utilities.Security.Jwt
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
            // _tokenOptions = Configuration.GetSection("TokenOptions").Value.ToString();
-
         }
 
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
@@ -64,4 +62,4 @@ namespace Core.Utilities.Security.Jwt
             return claims;
         }
     }
-}
+} 

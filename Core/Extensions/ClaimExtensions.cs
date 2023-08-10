@@ -10,6 +10,7 @@ namespace Core.Extensions
 {
     public static class ClaimExtensions
     {
+        //ICollectiondaki claim e AddEmail metodunu ekliyoruz
         public static void AddEmail(this ICollection<Claim> claims, string email)
         {
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, email));

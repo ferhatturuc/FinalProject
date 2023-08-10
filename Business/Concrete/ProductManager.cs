@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.CCSDemo;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -31,7 +32,8 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
-        //[SecuredOperation("product.add,admin")] claim
+        //claim
+        [SecuredOperation("product.add,admin")]
         //[LogAspect]-->AOP 
         //validation code
         [ValidationAspect(typeof(ProductValidator))]

@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Core.CrossCuttingConcerns.Caching.Microsoft
 {
-    public class MemoryCacheManager : ICacheManager
+    public class MemoryCache : ICacheManager
     {
         //Adapter Pattern
         IMemoryCache _memoryCache;
 
-        public MemoryCacheManager()
+        public MemoryCache()
         {
             _memoryCache = ServiceTool.ServiceProvider.GetService<IMemoryCache>();
         }
@@ -47,7 +47,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public void RemoveByPattern(string pattern)
         {
-            var cacheEntriesCollectionDefinition = typeof(MemoryCacheManager).GetProperty("EntriesCollection", System.Reflection.BindingFlags.Instance);
+            var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.Instance);
             var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(_memoryCache) as dynamic;
             List<ICacheEntry> cacheCollectionValues = new List<ICacheEntry>();
 

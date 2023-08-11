@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.CCSDemo;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -54,7 +55,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        [CacheAspect]
+        //key,value
+        [CacheAspect] 
         public IDataResult<List<Product>> GetAll()
         {
             //İş kodları - Yetkisi var mı ? 
@@ -81,6 +83,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max));
         }
 
+        [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));

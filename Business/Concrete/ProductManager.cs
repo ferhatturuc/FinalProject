@@ -38,6 +38,7 @@ namespace Business.Concrete
         //[LogAspect]-->AOP 
         //validation code
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             //business codes
@@ -46,7 +47,7 @@ namespace Business.Concrete
                 CheckIfProductNameExist(product.ProductName),
                 CheckIfCategoryLimitExceded());
 
-            if (result !=null)
+            if (result != null)
             {
                 return result;
             }
@@ -56,7 +57,7 @@ namespace Business.Concrete
         }
 
         //key,value
-        [CacheAspect] 
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             //İş kodları - Yetkisi var mı ? 
@@ -99,6 +100,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Product product)
         {
             var result = _productDal.GetAll(p => p.CategoryId == product.CategoryId).Count;

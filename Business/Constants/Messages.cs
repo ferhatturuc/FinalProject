@@ -29,5 +29,7 @@ namespace Business.Constants
         public static string CategoryAdded = "Kategori eklendi";
         public static string CategoryDeleted = "Kategori silindi";
         public static string ProductUpdated = "Ürün Güncellendi";
+
+        public static string CategoryNameAlreadyExist = "Bu isimde bir kategori zaten var";
     }
 }

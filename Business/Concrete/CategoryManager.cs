@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -24,10 +25,16 @@ namespace Business.Concrete
 
         public IResult Add(Category category)
         {
+            IResult result = BusinessRules.Run(
+                CheckIfCategoryNameExist(category.CategoryName));
+
+            if (result != null)
+            {
+                return result;
+            }
             _categoryDal.Add(category);
 
             return new SuccessResult(Messages.CategoryAdded);
-
         }
 
         public IResult Delete(Category category)
@@ -50,6 +57,17 @@ namespace Business.Concrete
         public IResult Update(Category category)
         {
             throw new NotImplementedException();
+        }
+
+        //business
+        private IResult CheckIfCategoryNameExist(string categoryname)
+        {
+            var result = _categoryDal.GetAll(c => c.CategoryName == categoryname).Any();
+            if (result == true)
+            {
+                return new ErrorResult(Messages.CategoryNameAlreadyExist);
+            }
+            return new SuccessResult();
         }
     }
 }

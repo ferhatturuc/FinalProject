@@ -68,8 +68,6 @@ namespace WebAPI
                 options.RegisterModule(new AutofacBusinessModule());
             });
 
-
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

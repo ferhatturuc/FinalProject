@@ -4,6 +4,7 @@ using Business.CCSDemo;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
@@ -38,6 +39,7 @@ namespace Business.Concrete
         //claim
         [SecuredOperation("product.add,admin")]
         //[LogAspect]-->AOP 
+        [LogAspect(typeof(FileLogger))]
         //validation code
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
@@ -95,7 +97,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            if (DateTime.Now.Hour == 16)
+            if (DateTime.Now.Hour == 17)
             {
                 return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintenanceTime);
             }
@@ -159,6 +161,12 @@ namespace Business.Concrete
             Add(product);
 
             return null;
+        }
+
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductDeleted);
         }
     }
 }

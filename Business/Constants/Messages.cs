@@ -26,5 +26,8 @@ namespace Business.Constants
 
         public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
 
+        public static string CategoryAdded = "Kategori eklendi";
+        public static string CategoryDeleted = "Kategori silindi";
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -12,6 +13,17 @@ namespace WebAPI.Controllers
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Category category)
+        {
+            var result = _categoryService.Add(category);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getall")]
